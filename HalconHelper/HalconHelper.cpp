@@ -1,20 +1,32 @@
-// HalconHelper.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// ***********************************************************************
+// Assembly         :
+// Created          : 08-02-2019
+// Last Modified On : 08-06-2019
+// ***********************************************************************
+// <copyright file="HalconHelper.cpp" company="Resolution Technology, Inc.">
+//     Copyright (c) Resolution Technology, Inc.. All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 
 #include <iostream>
 #include "HalconCpp.h"
 #include "HDevThread.h"
 #include "bdaqctrl.h"
-//#include "compatibility.h"
 
-using namespace HalconCpp;
 using namespace std;
 using namespace Automation::BDaq;
+using namespace HalconCpp;
 
 Herror TryReadImage(HalconCpp::HImage& image, const char* filename);
 void run(void);
 
-// procedure which reads images with error handling
+/// <summary>
+/// Tries the read image.
+/// </summary>
+/// <param name="image">The image.</param>
+/// <param name="filename">The filename.</param>
+/// <returns>Herror.</returns>
 Herror TryReadImage(HalconCpp::HImage& image, const char* filename)
 {
 	Herror  error_num;
@@ -35,6 +47,9 @@ Herror TryReadImage(HalconCpp::HImage& image, const char* filename)
 	return H_MSG_TRUE;
 }
 
+/// <summary>
+/// Runs this instance.
+/// </summary>
 void run(void)
 {
 	HImage        image;
@@ -52,13 +67,17 @@ void run(void)
 		window.SetPart(0, 0, height - 1, width - 1);
 		image.DispImage(window);
 		cout << "Halcon initialized and image loaded." << endl;
-
 	}
 	cout << "Hit <Enter> to quit" << endl;
 	cin.get();
 }
 
-// main program
+/// <summary>
+/// Mains the specified argc.
+/// </summary>
+/// <param name="argc">The argc.</param>
+/// <param name="argv">The argv.</param>
+/// <returns>int.</returns>
 int main(int argc, char* argv[])
 {
 	SetSystem("use_window_thread", "true");
